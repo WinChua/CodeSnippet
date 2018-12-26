@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/software/home/recsys/BookCode/LinuxSystemProgram/Chp10/time.c
+time.h
+-
+sys/time.h
+-
+stdio.h
+-
+

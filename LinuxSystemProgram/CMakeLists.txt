@@ -1,0 +1,33 @@
+cmake_minimum_required(VERSION 3.6)
+PROJECT (LinuxSystemPro)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+# find_library(SM_LIB SM)
+# message (STATUS ${SM_LIB})
+
+include (FindTCL)
+if(TCL_FOUND)
+    message ("STOP")
+    message (${TCL_LIBRARY})
+    message (${TCL_INCLUDE_PATH})
+endif()
+include (FindZLIB)
+if(ZLIB_FOUND)
+    message("ZLIB Found")
+    message (${ZLIB_LIBRARY})
+    message (${ZLIB_INCLUDE_DIR})
+endif()
+include (TestBigEndian)
+TEST_BIG_ENDIAN(IS_BE)
+if(IS_BE)
+    message ("It's big endian")
+else()
+    message ("It's little endian")
+endif()
+
+
+file(GLOB SUBS "Chp*")
+foreach (sub
+        ${SUBS})
+    add_subdirectory(${sub})
+endforeach()

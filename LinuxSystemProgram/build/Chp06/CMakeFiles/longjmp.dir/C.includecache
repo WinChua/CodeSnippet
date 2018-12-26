@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/software/home/recsys/BookCode/LinuxSystemProgram/Chp06/longjmp.c
+setjmp.h
+-
+stdio.h
+-
+stdlib.h
+-
+

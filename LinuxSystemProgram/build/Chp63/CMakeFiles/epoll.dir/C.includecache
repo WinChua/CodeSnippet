@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/software/home/recsys/BookCode/LinuxSystemProgram/Chp63/epoll.c
+sys/epoll.h
+-
+fcntl.h
+-
+stdlib.h
+-
+stdio.h
+-
+string.h
+-
+errno.h
+-
+

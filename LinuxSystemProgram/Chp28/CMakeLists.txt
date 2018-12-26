@@ -1,0 +1,22 @@
+# message (STATUS ${CMAKE_CURRENT_SOURCE_DIR})
+string (REGEX MATCH "^(.*)/(.*)" "*" ${CMAKE_CURRENT_SOURCE_DIR})
+set (CUR_OUTPUT ${CMAKE_MATCH_2})
+file(GLOB CSRCS "*.c")
+foreach(CSRC ${CSRCS})
+    string(REGEX MATCH "^(.*)/(.*)\\.[^.]*$" "*.c" ${CSRC})
+    set(EXEC ${CMAKE_MATCH_2})
+    add_executable(${EXEC} ${EXEC}.c)
+    get_target_property(proc ${EXEC} RUNTIME_OUTPUT_DIRECTORY )
+    set_target_properties(${EXEC}
+        PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CUR_OUTPUT})
+endforeach()
+
+file(GLOB CSRCXXS "*.cpp")
+foreach(CSRC ${CSRCXXS})
+    string(REGEX MATCH "^(.*)/(.*)\\.[^.]*$" "*.c" ${CSRC})
+    set(EXEC ${CMAKE_MATCH_2})
+    add_executable(${EXEC} ${EXEC}.cpp)
+    get_target_property(proc ${EXEC} RUNTIME_OUTPUT_DIRECTORY )
+    set_target_properties(${EXEC}
+        PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CUR_OUTPUT})
+endforeach()
