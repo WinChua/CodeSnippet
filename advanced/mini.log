@@ -1,0 +1,4 @@
+for p in 12340 12341 12342 12343 12344 12345;\
+	do\
+		python mini.py --port $p &\
+	done
