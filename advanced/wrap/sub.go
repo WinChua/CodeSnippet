@@ -1,6 +1,7 @@
 package wrap
 
 import (
+    "fmt"
     "time"
     "./fetch"
 )
@@ -8,8 +9,8 @@ import (
 type sub struct {
     fetcher fetch.Fetcher
     updates chan string
-    closed bool
     err error
+    closing chan chan error
 }
 
 func (s *sub) Updates() <-chan string {
@@ -17,24 +18,39 @@ func (s *sub) Updates() <-chan string {
 }
 
 func (s *sub) Close() error {
-    s.closed = true
-    return s.err
+    errc := make(chan error)
+    //s.closing is chan chan error. such struct is called require responsed.
+    s.closing <- errc
+    return <-errc
 }
 
 func (s *sub) loop() {
+    var pending []string
+    var next time.Duration
+    var err error
     for {
-        if s.closed {
+        var first string
+        var update chan string
+        if len(pending) > 0 {
+            first = pending[0]
+            update = s.updates
+        }
+        startFetch := time.After(next)
+        select {
+        // you should initialization s.closing in Subscribe function
+        case errc := <-s.closing:
+            errc <- err
             close(s.updates)
             return
+        case <-startFetch:
+            var item string
+            item, next, err = s.fetcher.Fetch()
+            if err == nil {
+                pending = append(pending, item)
+            }
+        case update <- first:
+            pending = pending[1:]
         }
-        item, next, err := s.fetcher.Fetch()
-        if err != nil {
-            s.err = err
-            time.Sleep(10 * time.Second)
-            continue
-        }
-        s.updates <- item
-        time.Sleep(next)
     }
 }
 

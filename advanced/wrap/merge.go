@@ -1,6 +1,7 @@
 package wrap
 
 
+
 type merge struct {
     subs []Subscription
     updates chan string
@@ -14,7 +15,9 @@ func (m *merge) Updates() <-chan string{
 
 func (m *merge) Close() error {
     for _, s := range m.subs {
-        s.Close()
+        if err := s.Close(); err != nil {
+            m.err = err
+        }
     }
     m.closed = true
     return m.err
@@ -35,6 +38,11 @@ func Merge(subs ...Subscription) Subscription {
                 }
                 select {
                 case s := <-(sub.Updates()):
+                    // sub.Updates() chan 被关闭的时候, 与range chan结束循环不同的是,
+                    // 将会返回一个zero-value
+                    if s == "" {
+                        break
+                    }
                     mupdate <- s
                 default:
                 }

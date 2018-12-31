@@ -14,3 +14,6 @@ ministop:
 
 gobuild:
 	go build && ./$(shell basename $(PWD))
+
+gorace:
+	go run -race main.go
