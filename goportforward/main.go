@@ -14,10 +14,13 @@ func handler(conn net.Conn) {
         return
     }
     go func() {
+        // io.Copy will finish when the tcp of conn has been closed
+        // after that we should close target
         defer target.Close()
         io.Copy(target, conn)
     }()
     go func() {
+        // the same as above
         defer conn.Close()
         io.Copy(conn, target)
     }()
