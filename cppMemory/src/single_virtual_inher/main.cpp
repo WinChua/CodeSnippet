@@ -38,7 +38,8 @@ class B2:virtual public B {
             std::cout << "B2::Bf2()" << std::endl;
         }
 };
-class D :public B1, public B2 {
+
+class D : public B1, public B2 {
     public:
         int id;
         char cd;
@@ -61,8 +62,8 @@ int main() {
     D d;
     long *vptr = GET_VPTR(d);
     show_vptr(vptr, false);
-    //d.ib = 42; //compile error: request of member ib is ambiguous;
     //d.B1::ib = 5;
     //d.B2::ib = 6;
+    SHOW_ADDR(d);
     printByte(d);
 }

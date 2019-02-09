@@ -1,3 +1,4 @@
+#https://blog.csdn.net/haoel/article/details/3081385
 cmake_minimum_required(VERSION 3.6)
 PROJECT (CPP_MEM)
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
