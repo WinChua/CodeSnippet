@@ -1,1 +1,0 @@
-/usr/bin/cc     CMakeFiles/ouch.dir/ouch.c.o  -o ../bin/Chp20/ouch 

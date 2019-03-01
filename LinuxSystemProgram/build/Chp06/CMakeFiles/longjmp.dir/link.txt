@@ -1,1 +1,0 @@
-/usr/bin/cc     CMakeFiles/longjmp.dir/longjmp.c.o  -o ../bin/Chp06/longjmp 
