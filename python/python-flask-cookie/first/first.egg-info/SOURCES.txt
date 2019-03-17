@@ -1,0 +1,9 @@
+README.rst
+first/__init__.py
+first/views.py
+first.egg-info/PKG-INFO
+first.egg-info/SOURCES.txt
+first.egg-info/dependency_links.txt
+first.egg-info/not-zip-safe
+first.egg-info/requires.txt
+first.egg-info/top_level.txt
