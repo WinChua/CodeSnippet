@@ -1,0 +1,24 @@
+time ./sort_string 
+
+real    0m47.476s
+user    0m45.864s
+sys 0m1.632s
+
+time ./sort_string_tc 
+
+real    0m36.766s
+user    0m35.928s
+sys 0m0.852s
+
+time ./sort_string_no_sort 
+time .
+real    0m6.078s
+user    0m5.504s
+sys 0m0.576s
+
+time ./sort_string_tc_no_sort 
+
+real    0m6.674s
+user    0m6.284s
+sys 0m0.388s
+
